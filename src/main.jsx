@@ -1,17 +1,20 @@
-import React from "react"
-import ReactDOM from "react-dom/client"
-import * as Tooltip from "@radix-ui/react-tooltip"
 import { css } from "@linaria/core"
+import * as Tooltip from "@radix-ui/react-tooltip"
 
-const cls = css`
-    background-color: red;
+// A dummy css rule just to trigger linaria evaluation thingy
+css`
+  background-color: red;
 `
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-    <React.StrictMode>
-        <Tooltip.Root className={cls}>
-            <Tooltip.Trigger>Hover me</Tooltip.Trigger>
-            <Tooltip.Content>Tooltip content</Tooltip.Content>
-        </Tooltip.Root>
-    </React.StrictMode>,
-)
+// `import "@radix-ui/react-tooltip"` is also sufficient.
+//
+// NOTE: If I were to do something like this:
+// ```
+// import { Tooltip } from "@radix-ui/react-tooltip"
+// <Tooltip />
+// ```
+// The bug would not manifest. It's only when I import the entire module that it does.
+// The import gets tree-shaken away.
+//
+// If I were to miss the `<Tooltip />` part, the bug would be back.
+
